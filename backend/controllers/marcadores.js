@@ -35,11 +35,23 @@ let guardarMarcador = async (marcador) => {
  */
 let consultarMarcadores = async () => {
     let _servicio = new ServicioPg();
-    let sql = `SELECT (id,url,nombre,descripcion) FROM public.marcadores`;
+    let sql = `SELECT * FROM public.marcadores`;
     let respuesta = await _servicio.ejecutarSql(sql);
     return respuesta;
 };
 
 
+/**
+ * Eliminar marcador mediante id
+ * @param {*} marcador 
+ */
+let eliminarMarcador = async (marcador) => {
+    let _servicio = new ServicioPg();
+    let sql = `DELETE FROM public.marcadores WHERE id = ${marcador.id}`
+    let respuesta = await _servicio.ejecutarSql(sql);
+    return respuesta;
+}
 
-module.exports = { validarMarcador, guardarMarcador, consultarMarcadores }
+
+
+module.exports = { validarMarcador, guardarMarcador, consultarMarcadores, eliminarMarcador }
